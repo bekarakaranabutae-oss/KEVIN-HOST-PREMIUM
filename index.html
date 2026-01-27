@@ -29,11 +29,17 @@ body{
 /* BACKGROUND VIDEO */
 #bgVideo{
     position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;
-    filter:brightness(0.2) contrast(1.2);
+}
+
+/* OVERLAY TO DARKEN VIDEO */
+#bgOverlay{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background: rgba(0,0,0,0.5); /* adjust 0.5 for opacity */
+    z-index:-2;
 }
 
 /* MATRIX BG */
-.matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;opacity:0.08;}
+.matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.08;}
 .scan-line{position:fixed;top:0;left:0;width:100%;height:3px;background:rgba(0,255,0,0.3);box-shadow:0 0 20px #00ff00;animation:scan 6s linear infinite;z-index:-1;}
 @keyframes scan{0%{top:0;}100%{top:100%;}}
 
@@ -128,8 +134,11 @@ button{font-size:14px;padding:12px 20px;}.user-photo{width:90px;height:90px;}#gl
 
 <!-- BACKGROUND VIDEO -->
 <video autoplay muted loop id="bgVideo">
-    <source src="https://cdn.pixabay.com/video/2022/03/10/22/36/abstract-7050221_1280.mp4" type="video/mp4">
+    <source src="background.mp4" type="video/mp4">
 </video>
+
+<!-- OVERLAY -->
+<div id="bgOverlay"></div>
 
 <!-- MATRIX BG -->
 <div class="matrix-bg" id="matrixBg"></div>
@@ -201,7 +210,7 @@ function startLoading(url){
 // BUTTON EVENTS
 document.getElementById("btnKiribati").addEventListener("click",()=>{ startLoading("https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-"); });
 document.getElementById("btnPortfolio").addEventListener("click",()=>{ startLoading("https://bekarakaranabutae-oss.github.io/MY-PORTFOLIO/"); });
-document.getElementById("btnFacebook").addEventListener("click",()=>{ startLoading("https://www.facebook.com/kevinbarai"); });
+document.getElementById("btnFacebook").addEventListener("click",()=>{ startLoading("https://www.facebook.com/kevinbaraierekana"); });
 document.getElementById("btnTikTok").addEventListener("click",()=>{ startLoading("https://www.tiktok.com/@nabutae.com4?_r=1&_t=ZS-93PfXnaagFA"); });
 
 // INIT MATRIX
