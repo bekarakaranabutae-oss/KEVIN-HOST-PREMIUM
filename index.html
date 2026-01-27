@@ -2,145 +2,252 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For My Love 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DXRY SYSTEM ACCESS | Kiribati Dashboard</title>
+
+<!-- GOOGLE FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<!-- THREE.JS + GLOBE -->
+<script src="https://unpkg.com/three@0.148.0/build/three.min.js"></script>
+<script src="https://unpkg.com/globe.gl"></script>
 
 <style>
-body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff4d6d, #7b2cbf);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', sans-serif;
-    overflow: hidden;
-    color: white;
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Share Tech Mono', monospace;
+    color:#00ff00;
+    overflow:hidden;
+    background:#000;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    height:100vh;
 }
 
-.card {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(12px);
-    border-radius: 22px;
-    padding: 30px 35px;
-    text-align: center;
-    width: 90%;
-    max-width: 380px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.4);
-    animation: pop 1s ease;
+/* BACKGROUND VIDEO */
+#bgVideo{
+    position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;
+    filter:brightness(0.2) contrast(1.2);
 }
 
-h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
+/* MATRIX BG */
+.matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;opacity:0.08;}
+.scan-line{position:fixed;top:0;left:0;width:100%;height:3px;background:rgba(0,255,0,0.3);box-shadow:0 0 20px #00ff00;animation:scan 6s linear infinite;z-index:-1;}
+@keyframes scan{0%{top:0;}100%{top:100%;}}
+
+/* LOGIN CARD */
+.access-container,.loading-container{
+    text-align:center;
+    border:2px solid #00ff00;
+    padding:50px 40px;
+    max-width:500px;width:90%;
+    background:rgba(0,0,0,0.85);
+    border-radius:15px;
+    backdrop-filter:blur(6px);
+    animation:fadeIn 1s ease forwards;
+    box-shadow:0 0 50px #00ff00,0 0 100px rgba(0,255,0,0.2);
+    position:relative;
+    z-index:2;
+    margin-top:30px;
+}
+@keyframes fadeIn{0%{opacity:0;transform:scale(0.9);}100%{opacity:1;transform:scale(1);}}
+
+/* GLITCH HEADING */
+.glitch{
+    font-size:3em;
+    color:#00ff00;
+    text-shadow:0 0 5px #00ff00,0 0 15px #00ff00,0 0 30px #00ff00;
+    animation:glitch 1.5s infinite;
+    margin-bottom:15px;
+}
+@keyframes glitch{
+0%,100%{transform:translate(0);}
+10%{transform:translate(-2px,2px);}
+20%{transform:translate(2px,-2px);}
+30%{transform:translate(-2px,-2px);}
+40%{transform:translate(2px,2px);}
+50%{transform:translate(-1px,1px);}
+60%{transform:translate(1px,-1px);}
+70%{transform:translate(-2px,1px);}
+80%{transform:translate(2px,-1px);}
+90%{transform:translate(0,2px);}
 }
 
-#typing {
-    min-height: 50px;
-    font-size: 1.1rem;
-    opacity: 0.95;
-    margin-bottom: 22px;
+/* USER PHOTO */
+.user-photo{
+    width:120px;height:120px;border-radius:50%;
+    border:2px solid #00ff00;
+    margin:0 auto 20px;display:block;
+    box-shadow:0 0 25px #00ff00,0 0 50px rgba(0,255,0,0.5),0 0 100px rgba(0,255,0,0.2);
+    object-fit:cover;
+    animation:float 3s ease-in-out infinite, glow 2s infinite alternate;
 }
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes glow{0%{box-shadow:0 0 20px #00ff00,0 0 40px rgba(0,255,0,0.4);}100%{box-shadow:0 0 35px #00ff00,0 0 70px rgba(0,255,0,0.6);}}
 
-button {
-    background: white;
-    color: #ff3c7d;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 30px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
+.access-container p{font-size:14px;opacity:0.7;margin-bottom:25px;letter-spacing:1px;}
+
+/* BUTTONS */
+button{
+    background:transparent;color:#00ff00;border:2px solid #00ff00;
+    padding:14px 30px;font-size:16px;cursor:pointer;
+    transition:all 0.3s ease;width:100%;margin-bottom:15px;
+    border-radius:8px;position:relative;overflow:hidden;
+    letter-spacing:1px;font-weight:bold;
 }
-
-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px white;
+button::before{
+    content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+    background:linear-gradient(90deg, transparent, rgba(0,255,0,0.3), transparent);transition:left 0.5s;
 }
+button:hover::before{left:100%;}
+button:hover{background: rgba(0,255,0,0.1);box-shadow:0 0 25px #00ff00,0 0 50px rgba(0,255,0,0.2);color:#000;}
 
-.heart {
-    position: absolute;
-    font-size: 22px;
-    animation: float 6s linear infinite;
-    opacity: 0.8;
-}
+/* LOADING SCREEN */
+.loading-container{display:none;}
+.loader{border:4px solid #003300;border-top:4px solid #00ff00;border-radius:50%;width:50px;height:50px;margin:20px auto;animation:spin 1s linear infinite;}
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+#loadingBarContainer{width:80%;height:12px;border:2px solid #00ff00;margin:10px auto;border-radius:6px;overflow:hidden;}
+#loadingBar{width:0%;height:100%;background:#00ff00;transition:width 0.2s;}
 
-@keyframes float {
-    from { transform: translateY(100vh); }
-    to { transform: translateY(-10vh); }
-}
+/* GLOBE */
+#globeContainer{width:100%;height:450px;margin-top:20px;z-index:1;}
 
-@keyframes pop {
-    from { opacity: 0; transform: scale(0.7); }
-    to { opacity: 1; transform: scale(1); }
+/* FOOTER */
+footer{position:fixed;bottom:10px;width:100%;text-align:center;font-size:12px;opacity:0.5;}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+.access-container,.loading-container{padding:30px 25px;}.glitch{font-size:2em;}
+button{font-size:14px;padding:12px 20px;}.user-photo{width:90px;height:90px;}#globeContainer{height:250px;}
 }
 </style>
 </head>
-
 <body>
 
-<div class="card">
-    <h1> MAURI Theresa😁 </h1>
+<!-- BACKGROUND VIDEO -->
+<video autoplay muted loop id="bgVideo">
+    <source src="https://cdn.pixabay.com/video/2022/03/10/22/36/abstract-7050221_1280.mp4" type="video/mp4">
+</video>
 
-    <div id="typing"></div>
+<!-- MATRIX BG -->
+<div class="matrix-bg" id="matrixBg"></div>
+<div class="scan-line"></div>
 
-    <button onclick="openHeart()">Open My Heart 💌</button>
-
-    <p style="margin-top:20px; font-size:0.85rem;">
-        — Kevin Taake 🇰🇮
-    </p>
+<!-- LOGIN ACCESS -->
+<div class="access-container" id="accessScreen">
+    <img src="kevin.jpg" alt="Kevin Taake" class="user-photo">
+    <h1 class="glitch">SYSTEM ACCESS</h1>
+    <p>Choose your portal to proceed</p>
+    <button id="btnKiribati">KIRIBATI WEBSITE</button>
+    <button id="btnPortfolio">MY PORTFOLIO</button>
+    <button id="btnFacebook">FACEBOOK PROFILE</button>
+    <button id="btnTikTok">TIKTOK PROFILE</button>
 </div>
 
-<!-- Music -->
-<audio id="bgm" loop autoplay>
-  <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
-</audio>
+<!-- LOADING SCREEN -->
+<div class="loading-container" id="loadingScreen">
+    <h1 class="glitch">LOADING</h1>
+    <div class="loader"></div>
+    <p id="loadingText">0%</p>
+    <div id="loadingBarContainer"><div id="loadingBar"></div></div>
+</div>
+
+<!-- GLOBE -->
+<div id="globeContainer"></div>
+
+<footer>© Kevin Taake 🇰🇮</footer>
 
 <script>
-// Typing effect text
-const text = "Ko uara gkai ao e uara naba am bwai anne 😑💖 I love you so much 😁";
-let index = 0;
+// MATRIX EFFECT
+function createMatrix(){
+    const canvas=document.createElement('canvas');
+    const ctx=canvas.getContext('2d');
+    document.getElementById('matrixBg').appendChild(canvas);
+    canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+    const chars="01".split(""); const fontSize=14; const columns=canvas.width/fontSize; const drops=Array(columns).fill(1);
 
-function typeText() {
-    if (index < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(index);
-        index++;
-        setTimeout(typeText, 60);
+    function draw(){
+        ctx.fillStyle="rgba(0,0,0,0.05)"; ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle="#00ff00"; ctx.font=fontSize+"px monospace";
+        drops.forEach((y,i)=>{
+            const text=chars[Math.floor(Math.random()*chars.length)];
+            ctx.fillText(text,i*fontSize,y*fontSize);
+            drops[i]= (y*fontSize>canvas.height && Math.random()>0.975)?0:y+1;
+        });
+        requestAnimationFrame(draw);
     }
-}
-typeText();
-
-// Button message
-function openHeart() {
-    alert("Ko uara gkai ia missiniko 😭💖 I love you so much 😁");
-    makeConfetti();
+    draw();
+    window.addEventListener('resize',()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
 }
 
-// Floating hearts
-for (let i = 0; i < 25; i++) {
-    let h = document.createElement("div");
-    h.className = "heart";
-    h.innerText = "💖";
-    h.style.left = Math.random() * 100 + "vw";
-    h.style.animationDuration = (3 + Math.random() * 5) + "s";
-    document.body.appendChild(h);
-}
-
-// Confetti effect
-function makeConfetti() {
-    for (let i = 0; i < 30; i++) {
-        let c = document.createElement("div");
-        c.innerText = "✨";
-        c.style.position = "absolute";
-        c.style.left = Math.random() * 100 + "vw";
-        c.style.top = "-20px";
-        c.style.fontSize = "20px";
-        c.style.animation = "float 3s linear";
-        document.body.appendChild(c);
-        setTimeout(() => c.remove(), 3000);
+// LOADING
+function startLoading(url){
+    document.getElementById('accessScreen').style.display='none';
+    const loading=document.getElementById('loadingScreen'); loading.style.display='block';
+    let percent=0;
+    function update(){
+        percent+=Math.floor(Math.random()*4)+1;
+        if(percent>100) percent=100;
+        document.getElementById('loadingText').textContent=percent+'%';
+        document.getElementById('loadingBar').style.width=percent+'%';
+        if(percent<100) requestAnimationFrame(update);
+        else setTimeout(()=> window.location.href=url,500);
     }
+    update();
 }
+
+// BUTTON EVENTS
+document.getElementById("btnKiribati").addEventListener("click",()=>{ startLoading("https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-"); });
+document.getElementById("btnPortfolio").addEventListener("click",()=>{ startLoading("https://bekarakaranabutae-oss.github.io/MY-PORTFOLIO/"); });
+document.getElementById("btnFacebook").addEventListener("click",()=>{ startLoading("https://www.facebook.com/kevinbarai"); });
+document.getElementById("btnTikTok").addEventListener("click",()=>{ startLoading("https://www.tiktok.com/@nabutae.com4?_r=1&_t=ZS-93PfXnaagFA"); });
+
+// INIT MATRIX
+window.onload=createMatrix;
+
+// KIRIBATI ISLANDS DATA
+const kiribatiIslands=[
+  {name:'Banaba',lat:-0.892,lng:169.533,link:'https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-'},
+  {name:'Tarawa',lat:1.451,lng:173.033,link:'https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-'},
+  {name:'Kiritimati',lat:1.872,lng:-157.427,link:'https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-'},
+  {name:'Tabuaeran',lat:3.874,lng:-159.371,link:'https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-'},
+  {name:'Teraina',lat:4.680,lng:-160.373,link:'https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-'}
+];
+
+// INIT GLOBE
+const globe=Globe()
+.globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
+.bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+.showGraticules(true)
+.backgroundColor('#00000000')
+.width(window.innerWidth)
+.height(450)
+.animateIn(true)
+.pointsData(kiribatiIslands)
+.pointAltitude(0.03)
+.pointColor(()=> 'lime')
+.pointRadius(0.5)
+.onPointClick(p=>{
+    if(p.link) window.open(p.link,'_blank');
+})
+.onPointHover(p=>{
+    document.body.style.cursor = p ? 'pointer' : 'default';
+})
+.labelsData(kiribatiIslands)
+.labelLat(d=>d.lat)
+.labelLng(d=>d.lng)
+.labelText(d=>d.name)
+.labelColor(()=> 'lime')
+.labelSize(d=>0.5)
+.labelDotRadius(d=>0.2)
+.labelAltitude(d=>0.05);
+
+document.getElementById('globeContainer').appendChild(globe.renderer().domElement);
+globe.controls().autoRotate=true;
+globe.controls().autoRotateSpeed=0.3;
+window.addEventListener('resize',()=>{globe.width(window.innerWidth);globe.height(450);});
 </script>
-
 </body>
 </html>
