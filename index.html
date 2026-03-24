@@ -1,262 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DXRY SYSTEM ACCESS | Kiribati Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KEVIN TAAKE MATAIO | Portfolio</title>
+  <meta name="description" content="KEVIN TAAKE MATAIO - Professional Hacker, Web Developer, Founder, Tarawa, Kiribati. Check my portfolio and projects.">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: black; font-weight: bold; }
 
-<!-- GOOGLE FONT -->
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    /* Background with flag and wet/sunset effects */
+    body {
+      background: url('https://upload.wikimedia.org/wikipedia/commons/d/d3/Flag_of_Kiribati.svg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
 
-<!-- THREE.JS + GLOBE -->
-<script src="https://unpkg.com/three@0.148.0/build/three.min.js"></script>
-<script src="https://unpkg.com/globe.gl"></script>
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to top, rgba(255,140,0,0.25), rgba(255,255,255,0.05));
+      pointer-events: none;
+    }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-    font-family:'Share Tech Mono', monospace;
-    color:#00ff00;
-    overflow:hidden;
-    background:#000;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    align-items:center;
-    height:100vh;
-}
+    .drizzle {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.1),
+        rgba(255,255,255,0.1) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      animation: drizzle 0.5s linear infinite;
+    }
+    @keyframes drizzle {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
 
-/* BACKGROUND VIDEO */
-#bgVideo{
-    position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;
-}
+    /* Navbar */
+    nav { background: rgba(30,144,255,0.8); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; color: black; font-weight: bold; }
+    nav h1 { font-size: 1.5rem; }
+    nav ul { list-style: none; display: flex; gap: 1rem; }
+    nav ul li { font-weight: bold; }
+    nav ul li a { color: black; font-weight: bold; }
 
-/* OVERLAY TO DARKEN VIDEO */
-#bgOverlay{
-    position:fixed;top:0;left:0;width:100%;height:100%;
-    background: rgba(0,0,0,0.5); /* adjust 0.5 for opacity */
-    z-index:-2;
-}
+    /* Hero Section */
+    .hero { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 90vh; text-align: center; }
+    .hero img {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      border: 4px solid black;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+    .hero a { margin-top: 1.5rem; background: #fff; color: #ff4500; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: bold; transition: 0.3s; }
+    .hero a:hover { background: #ff4500; color: #fff; }
 
-/* MATRIX BG */
-.matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.08;}
-.scan-line{position:fixed;top:0;left:0;width:100%;height:3px;background:rgba(0,255,0,0.3);box-shadow:0 0 20px #00ff00;animation:scan 6s linear infinite;z-index:-1;}
-@keyframes scan{0%{top:0;}100%{top:100%;}}
+    /* Sections */
+    .section { padding: 4rem 2rem; max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.7); border-radius: 15px; }
+    .about { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; }
+    .about img { flex: 1; border-radius: 15px; max-width: 300px; height: auto; }
+    .about div { flex: 2; font-weight: bold; color: black; }
 
-/* LOGIN CARD */
-.access-container,.loading-container{
-    text-align:center;
-    border:2px solid #00ff00;
-    padding:50px 40px;
-    max-width:500px;width:90%;
-    background:rgba(0,0,0,0.85);
-    border-radius:15px;
-    backdrop-filter:blur(6px);
-    animation:fadeIn 1s ease forwards;
-    box-shadow:0 0 50px #00ff00,0 0 100px rgba(0,255,0,0.2);
-    position:relative;
-    z-index:2;
-    margin-top:30px;
-}
-@keyframes fadeIn{0%{opacity:0;transform:scale(0.9);}100%{opacity:1;transform:scale(1);}}
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+    .card { background: rgba(255,255,255,0.8); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); transition: 0.3s; font-weight: bold; color: black; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.7); }
+    .card h3 { margin-bottom: 1rem; color: #ff4500; font-weight: bold; }
 
-/* GLITCH HEADING */
-.glitch{
-    font-size:3em;
-    color:#00ff00;
-    text-shadow:0 0 5px #00ff00,0 0 15px #00ff00,0 0 30px #00ff00;
-    animation:glitch 1.5s infinite;
-    margin-bottom:15px;
-}
-@keyframes glitch{
-0%,100%{transform:translate(0);}
-10%{transform:translate(-2px,2px);}
-20%{transform:translate(2px,-2px);}
-30%{transform:translate(-2px,-2px);}
-40%{transform:translate(2px,2px);}
-50%{transform:translate(-1px,1px);}
-60%{transform:translate(1px,-1px);}
-70%{transform:translate(-2px,1px);}
-80%{transform:translate(2px,-1px);}
-90%{transform:translate(0,2px);}
-}
+    .contact { text-align: center; font-weight: bold; color: black; }
+    .contact a { display: inline-block; margin: 0.5rem; padding: 0.6rem 1.2rem; border-radius: 50px; border: 2px solid black; color: black; font-weight: bold; transition: 0.3s; }
+    .contact a:hover { background: black; color: #fff; }
 
-/* USER PHOTO */
-.user-photo{
-    width:120px;height:120px;border-radius:50%;
-    border:2px solid #00ff00;
-    margin:0 auto 20px;display:block;
-    box-shadow:0 0 25px #00ff00,0 0 50px rgba(0,255,0,0.5),0 0 100px rgba(0,255,0,0.2);
-    object-fit:cover;
-    animation:float 3s ease-in-out infinite, glow 2s infinite alternate;
-}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-@keyframes glow{0%{box-shadow:0 0 20px #00ff00,0 0 40px rgba(0,255,0,0.4);}100%{box-shadow:0 0 35px #00ff00,0 0 70px rgba(0,255,0,0.6);}}
+    footer { text-align: center; padding: 1rem; color: black; font-weight: bold; }
 
-.access-container p{font-size:14px;opacity:0.7;margin-bottom:25px;letter-spacing:1px;}
+    /* Map style */
+    .map-container {
+      margin-top: 2rem;
+      border-radius: 15px;
+      overflow: hidden;
+      height: 400px;
+    }
+    iframe { width: 100%; height: 100%; border: 0; }
 
-/* BUTTONS */
-button{
-    background:transparent;color:#00ff00;border:2px solid #00ff00;
-    padding:14px 30px;font-size:16px;cursor:pointer;
-    transition:all 0.3s ease;width:100%;margin-bottom:15px;
-    border-radius:8px;position:relative;overflow:hidden;
-    letter-spacing:1px;font-weight:bold;
-}
-button::before{
-    content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-    background:linear-gradient(90deg, transparent, rgba(0,255,0,0.3), transparent);transition:left 0.5s;
-}
-button:hover::before{left:100%;}
-button:hover{background: rgba(0,255,0,0.1);box-shadow:0 0 25px #00ff00,0 0 50px rgba(0,255,0,0.2);color:#000;}
-
-/* LOADING SCREEN */
-.loading-container{display:none;}
-.loader{border:4px solid #003300;border-top:4px solid #00ff00;border-radius:50%;width:50px;height:50px;margin:20px auto;animation:spin 1s linear infinite;}
-@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-#loadingBarContainer{width:80%;height:12px;border:2px solid #00ff00;margin:10px auto;border-radius:6px;overflow:hidden;}
-#loadingBar{width:0%;height:100%;background:#00ff00;transition:width 0.2s;}
-
-/* GLOBE */
-#globeContainer{width:100%;height:450px;margin-top:20px;z-index:1;}
-
-/* FOOTER */
-footer{position:fixed;bottom:10px;width:100%;text-align:center;font-size:12px;opacity:0.5;}
-
-/* RESPONSIVE */
-@media(max-width:480px){
-.access-container,.loading-container{padding:30px 25px;}.glitch{font-size:2em;}
-button{font-size:14px;padding:12px 20px;}.user-photo{width:90px;height:90px;}#globeContainer{height:250px;}
-}
-</style>
+    /* KEVIN LOGIN ACCESS animation */
+    #kevin-access { text-align: center; font-family: monospace; font-size: 1.5rem; color: black; font-weight: bold; margin-top:2rem; }
+    #cursor { display: inline-block; font-weight: bold; }
+  </style>
 </head>
 <body>
 
-<!-- BACKGROUND VIDEO -->
-<video autoplay muted loop id="bgVideo">
-    <source src="background.mp4" type="video/mp4">
-</video>
+  <div class="drizzle"></div>
 
-<!-- OVERLAY -->
-<div id="bgOverlay"></div>
+  <!-- Navbar -->
+  <nav>
+    <h1>KEVIN TAAKE 🇰🇮</h1>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#map">Map</a></li>
+    </ul>
+  </nav>
 
-<!-- MATRIX BG -->
-<div class="matrix-bg" id="matrixBg"></div>
-<div class="scan-line"></div>
+  <!-- Hero Section with Profile Picture -->
+  <section class="hero">
+    <img src="https://via.placeholder.com/250.png?text=Your+Profile+Photo" alt="KEVIN TAAKE MATAIO Profile">
+    <a href="#contact">Get in Touch</a>
+  </section>
 
-<!-- LOGIN ACCESS -->
-<div class="access-container" id="accessScreen">
-    <img src="kevin.jpg" alt="Kevin Taake" class="user-photo">
-    <h1 class="glitch">SYSTEM ACCESS</h1>
-    <p>Choose your portal to proceed</p>
-    <button id="btnKiribati">KIRIBATI WEBSITE</button>
-    <button id="btnPortfolio">MY PORTFOLIO</button>
-    <button id="btnFacebook">FACEBOOK PROFILE</button>
-    <button id="btnTikTok">TIKTOK PROFILE</button>
-</div>
+  <!-- About Section -->
+  <section class="section about" id="about">
+    <img src="https://via.placeholder.com/300x300.png?text=Profile+Photo" alt="KEVIN TAAKE MATAIO Photo">
+    <div>
+      <h2>About Me</h2>
+      <p><strong>Name:</strong> KEVIN TAAKE 🇰🇮</p>
+      <p><strong>Age:</strong> 21</p>
+      <p><strong>Status:</strong> Single</p>
+      <p><strong>Location:</strong> Tarawa, Kiribati</p>
+      <p><strong>Profession:</strong> Professional Hacker & Web Developer</p>
+      <p><strong>Founder:</strong> Creator of multiple websites and digital projects</p>
+      <p><strong>Skills:</strong> HTML, CSS, JavaScript, Python, Ethical Hacking, Cybersecurity, Web Design, SEO & Digital Marketing</p>
+      <p><strong>About Me:</strong> I am a driven and creative professional with a passion for cybersecurity, web development, and digital innovation. I thrive on solving complex challenges, building secure and innovative solutions, and helping businesses and individuals succeed online. My vision is to create technologies that make a real impact in the digital world.</p>
+      <p><strong>Hobbies & Interests:</strong> Coding, learning new hacking techniques, exploring technology trends, contributing to online communities, and mentoring aspiring developers.</p>
+    </div>
+  </section>
 
-<!-- LOADING SCREEN -->
-<div class="loading-container" id="loadingScreen">
-    <h1 class="glitch">LOADING</h1>
-    <div class="loader"></div>
-    <p id="loadingText">0%</p>
-    <div id="loadingBarContainer"><div id="loadingBar"></div></div>
-</div>
+  <!-- KEVIN LOGIN ACCESS Section -->
+  <section class="section" id="kevin-access">
+    <h2 style="margin-bottom:1rem;">KEVIN LOGIN ACCESS</h2>
+    <div>
+      <span id="loading-text"></span><span id="cursor">|</span>
+    </div>
+  </section>
 
-<!-- GLOBE -->
-<div id="globeContainer"></div>
+  <!-- Services Section -->
+  <section class="section" id="services">
+    <h2 style="text-align:center; margin-bottom:2rem;">What I Offer</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Web Development</h3>
+        <p>Creating responsive and modern websites for individuals and businesses.</p>
+      </div>
+      <div class="card">
+        <h3>Cybersecurity Services</h3>
+        <p>Protecting websites and networks with ethical hacking and advanced security solutions.</p>
+      </div>
+      <div class="card">
+        <h3>Portfolio & Branding</h3>
+        <p>Designing unique portfolios and personal branding for professionals and creatives.</p>
+      </div>
+    </div>
+  </section>
 
-<footer>© Kevin Taake 🇰🇮</footer>
+  <!-- Contact Section -->
+  <section class="section contact" id="contact">
+    <h2>Contact Me</h2>
+    <p>Let's connect! Reach out via social media or email.</p>
+    <a href="mailto:youremail@example.com">Email Me</a>
+    <a href="https://github.com/yourgithub" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/yourlinkedin" target="_blank">LinkedIn</a>
+  </section>
 
-<script>
-// MATRIX EFFECT
-function createMatrix(){
-    const canvas=document.createElement('canvas');
-    const ctx=canvas.getContext('2d');
-    document.getElementById('matrixBg').appendChild(canvas);
-    canvas.width=window.innerWidth; canvas.height=window.innerHeight;
-    const chars="01".split(""); const fontSize=14; const columns=canvas.width/fontSize; const drops=Array(columns).fill(1);
+  <!-- Map Section -->
+  <section class="section" id="map">
+    <h2 style="text-align:center; margin-bottom:2rem;">My Location</h2>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.2667988121693!2d173.01053657526994!3d-1.8749067999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71f5830e6c2d6a07%3A0x83e093d4f2d3a5c9!2sBairiki%2C%20Kiribati!5e0!3m2!1sen!2sus!4v1677000000000!5m2!1sen!2sus"
+        allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
 
-    function draw(){
-        ctx.fillStyle="rgba(0,0,0,0.05)"; ctx.fillRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle="#00ff00"; ctx.font=fontSize+"px monospace";
-        drops.forEach((y,i)=>{
-            const text=chars[Math.floor(Math.random()*chars.length)];
-            ctx.fillText(text,i*fontSize,y*fontSize);
-            drops[i]= (y*fontSize>canvas.height && Math.random()>0.975)?0:y+1;
-        });
-        requestAnimationFrame(draw);
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 KEVIN TAAKE 🇰🇮. All rights reserved.</p>
+  </footer>
+
+  <!-- KEVIN LOGIN ACCESS Script -->
+  <script>
+    const name = "KEVIN TAAKE MATAIO";
+    let i = 0;
+    const speed = 150;
+    const loadingText = document.getElementById("loading-text");
+
+    function typeName() {
+      if (i < name.length) {
+        loadingText.textContent += name.charAt(i);
+        i++;
+        setTimeout(typeName, speed);
+      } else {
+        setInterval(() => {
+          const cursor = document.getElementById("cursor");
+          cursor.style.visibility = (cursor.style.visibility === "visible") ? "hidden" : "visible";
+        }, 500);
+      }
     }
-    draw();
-    window.addEventListener('resize',()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
-}
 
-// LOADING
-function startLoading(url){
-    document.getElementById('accessScreen').style.display='none';
-    const loading=document.getElementById('loadingScreen'); loading.style.display='block';
-    let percent=0;
-    function update(){
-        percent+=Math.floor(Math.random()*4)+1;
-        if(percent>100) percent=100;
-        document.getElementById('loadingText').textContent=percent+'%';
-        document.getElementById('loadingBar').style.width=percent+'%';
-        if(percent<100) requestAnimationFrame(update);
-        else setTimeout(()=> window.location.href=url,500);
-    }
-    update();
-}
+    typeName();
+  </script>
 
-// BUTTON EVENTS
-document.getElementById("btnKiribati").addEventListener("click",()=>{ startLoading("https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-"); });
-document.getElementById("btnPortfolio").addEventListener("click",()=>{ startLoading("https://bekarakaranabutae-oss.github.io/MY-PORTFOLIO/"); });
-document.getElementById("btnFacebook").addEventListener("click",()=>{ startLoading("https://www.facebook.com/kevinbaraierekana"); });
-document.getElementById("btnTikTok").addEventListener("click",()=>{ startLoading("https://www.tiktok.com/@nabutae.com4?_r=1&_t=ZS-93PfXnaagFA"); });
-
-// INIT MATRIX
-window.onload=createMatrix;
-
-// KIRIBATI ISLANDS DATA
-const kiribatiIslands=[
-  {name:'Banaba',lat:-0.892,lng:169.533,link:'https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-'},
-  {name:'Tarawa',lat:1.451,lng:173.033,link:'https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-'},
-  {name:'Kiritimati',lat:1.872,lng:-157.427,link:'https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-'},
-  {name:'Tabuaeran',lat:3.874,lng:-159.371,link:'https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-'},
-  {name:'Teraina',lat:4.680,lng:-160.373,link:'https://bekarakaranabutae-oss.github.io/KIRIBATI-WEBSITE-BY-KEVIN-TAAKE-'}
-];
-
-// INIT GLOBE
-const globe=Globe()
-.globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
-.bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
-.showGraticules(true)
-.backgroundColor('#00000000')
-.width(window.innerWidth)
-.height(450)
-.animateIn(true)
-.pointsData(kiribatiIslands)
-.pointAltitude(0.03)
-.pointColor(()=> 'lime')
-.pointRadius(0.5)
-.onPointClick(p=>{
-    if(p.link) window.open(p.link,'_blank');
-})
-.onPointHover(p=>{
-    document.body.style.cursor = p ? 'pointer' : 'default';
-})
-.labelsData(kiribatiIslands)
-.labelLat(d=>d.lat)
-.labelLng(d=>d.lng)
-.labelText(d=>d.name)
-.labelColor(()=> 'lime')
-.labelSize(d=>0.5)
-.labelDotRadius(d=>0.2)
-.labelAltitude(d=>0.05);
-
-document.getElementById('globeContainer').appendChild(globe.renderer().domElement);
-globe.controls().autoRotate=true;
-globe.controls().autoRotateSpeed=0.3;
-window.addEventListener('resize',()=>{globe.width(window.innerWidth);globe.height(450);});
-</script>
 </body>
 </html>
