@@ -1,210 +1,269 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KEVIN TAAKE MATAIO | Portfolio</title>
-  <meta name="description" content="KEVIN TAAKE MATAIO - Professional Hacker, Web Developer, Founder, Tarawa, Kiribati. Check my portfolio and projects.">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: black; font-weight: bold; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KEVIN TAAKE MATAIO | Portfolio</title><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"><style>
 
-    /* Background with flag and wet/sunset effects */
-    body {
-      background: url('https://upload.wikimedia.org/wikipedia/commons/d/d3/Flag_of_Kiribati.svg') no-repeat center center fixed;
-      background-size: cover;
-      position: relative;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(to top, rgba(255,140,0,0.25), rgba(255,255,255,0.05));
-      pointer-events: none;
-    }
+body{
+font-family:'Roboto',sans-serif;
+color:white;
+background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.95)),
+url('https://upload.wikimedia.org/wikipedia/commons/d/d3/Flag_of_Kiribati.svg');
+background-size:cover;
+background-attachment:fixed;
+}
 
-    .drizzle {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.1),
-        rgba(255,255,255,0.1) 1px,
-        transparent 1px,
-        transparent 3px
-      );
-      pointer-events: none;
-      animation: drizzle 0.5s linear infinite;
-    }
-    @keyframes drizzle {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 100%; }
-    }
+/* NAVBAR */
+nav{
+position:sticky;
+top:0;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+background:rgba(0,0,0,.6);
+backdrop-filter:blur(10px);
+border-bottom:1px solid cyan;
+z-index:1000;
+}
 
-    /* Navbar */
-    nav { background: rgba(30,144,255,0.8); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; color: black; font-weight: bold; }
-    nav h1 { font-size: 1.5rem; }
-    nav ul { list-style: none; display: flex; gap: 1rem; }
-    nav ul li { font-weight: bold; }
-    nav ul li a { color: black; font-weight: bold; }
+nav h1{
+color:cyan;
+text-shadow:0 0 10px cyan;
+}
 
-    /* Hero Section */
-    .hero { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 90vh; text-align: center; }
-    .hero img {
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      border: 4px solid black;
-      object-fit: cover;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
-    }
-    .hero a { margin-top: 1.5rem; background: #fff; color: #ff4500; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: bold; transition: 0.3s; }
-    .hero a:hover { background: #ff4500; color: #fff; }
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
 
-    /* Sections */
-    .section { padding: 4rem 2rem; max-width: 1000px; margin: 0 auto; background: rgba(255,255,255,0.7); border-radius: 15px; }
-    .about { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; }
-    .about img { flex: 1; border-radius: 15px; max-width: 300px; height: auto; }
-    .about div { flex: 2; font-weight: bold; color: black; }
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
 
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-    .card { background: rgba(255,255,255,0.8); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); transition: 0.3s; font-weight: bold; color: black; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.7); }
-    .card h3 { margin-bottom: 1rem; color: #ff4500; font-weight: bold; }
+nav a:hover{
+color:cyan;
+text-shadow:0 0 10px cyan;
+}
 
-    .contact { text-align: center; font-weight: bold; color: black; }
-    .contact a { display: inline-block; margin: 0.5rem; padding: 0.6rem 1.2rem; border-radius: 50px; border: 2px solid black; color: black; font-weight: bold; transition: 0.3s; }
-    .contact a:hover { background: black; color: #fff; }
+/* HERO */
+.hero{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
 
-    footer { text-align: center; padding: 1rem; color: black; font-weight: bold; }
+.hero img{
+width:260px;
+height:260px;
+border-radius:50%;
+border:4px solid cyan;
+box-shadow:0 0 40px cyan;
+transition:.4s;
+}
 
-    /* Map style */
-    .map-container {
-      margin-top: 2rem;
-      border-radius: 15px;
-      overflow: hidden;
-      height: 400px;
-    }
-    iframe { width: 100%; height: 100%; border: 0; }
+.hero img:hover{
+transform:scale(1.05);
+box-shadow:0 0 80px cyan;
+}
 
-    /* KEVIN LOGIN ACCESS animation */
-    #kevin-access { text-align: center; font-family: monospace; font-size: 1.5rem; color: black; font-weight: bold; margin-top:2rem; }
-    #cursor { display: inline-block; font-weight: bold; }
-  </style>
-</head>
-<body>
+.hero h2{
+margin-top:25px;
+font-size:2.5rem;
+letter-spacing:3px;
+color:cyan;
+text-shadow:0 0 15px cyan;
+}
 
-  <div class="drizzle"></div>
+.hero a{
+margin-top:30px;
+padding:15px 35px;
+border-radius:50px;
+background:linear-gradient(45deg,cyan,#00ff88);
+color:black;
+font-weight:bold;
+text-decoration:none;
+transition:.4s;
+}
 
-  <!-- Navbar -->
-  <nav>
-    <h1>KEVIN TAAKE 🇰🇮</h1>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#map">Map</a></li>
-    </ul>
-  </nav>
+.hero a:hover{
+transform:translateY(-5px);
+box-shadow:0 0 25px cyan;
+}
 
-  <!-- Hero Section with Profile Picture -->
-  <section class="hero">
-    <img src="kevin-profile.jpg" alt="KEVIN TAAKE MATAIO Profile">
-    <a href="#contact">Get in Touch</a>
-  </section>
+/* SECTION GLASS */
+.section{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+border-radius:20px;
+padding:60px 40px;
+margin:60px auto;
+max-width:1100px;
+border:1px solid rgba(0,255,255,.2);
+box-shadow:0 0 30px rgba(0,255,255,.2);
+}
 
-  <!-- About Section -->
-  <section class="section about" id="about">
-    <img src="kevin-profile.jpg" alt="KEVIN TAAKE MATAIO Photo">
-    <div>
-      <h2>About Me</h2>
-      <p><strong>Name:</strong> KEVIN TAAKE 🇰🇮</p>
-      <p><strong>Age:</strong> 21</p>
-      <p><strong>Status:</strong> Single</p>
-      <p><strong>Location:</strong> Tarawa, Kiribati</p>
-      <p><strong>Profession:</strong> Professional Hacker & Web Developer</p>
-      <p><strong>Founder:</strong> Creator of multiple websites and digital projects</p>
-      <p><strong>Skills:</strong> HTML, CSS, JavaScript, Python, Ethical Hacking, Cybersecurity, Web Design, SEO & Digital Marketing</p>
-      <p><strong>About Me:</strong> I am a driven and creative professional with a passion for cybersecurity, web development, and digital innovation. I thrive on solving complex challenges, building secure and innovative solutions, and helping businesses and individuals succeed online. My vision is to create technologies that make a real impact in the digital world.</p>
-      <p><strong>Hobbies & Interests:</strong> Coding, learning new hacking techniques, exploring technology trends, contributing to online communities, and mentoring aspiring developers.</p>
-    </div>
-  </section>
+/* ABOUT */
+.about{
+display:flex;
+flex-wrap:wrap;
+gap:40px;
+align-items:center;
+}
 
-  <!-- KEVIN LOGIN ACCESS Section -->
-  <section class="section" id="kevin-access">
-    <h2 style="margin-bottom:1rem;">KEVIN LOGIN ACCESS</h2>
-    <div>
-      <span id="loading-text"></span><span id="cursor">|</span>
-    </div>
-  </section>
+.about img{
+max-width:300px;
+border-radius:20px;
+box-shadow:0 0 30px cyan;
+}
 
-  <!-- Services Section -->
-  <section class="section" id="services">
-    <h2 style="text-align:center; margin-bottom:2rem;">What I Offer</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Web Development</h3>
-        <p>Creating responsive and modern websites for individuals and businesses.</p>
-      </div>
-      <div class="card">
-        <h3>Cybersecurity Services</h3>
-        <p>Protecting websites and networks with ethical hacking and advanced security solutions.</p>
-      </div>
-      <div class="card">
-        <h3>Portfolio & Branding</h3>
-        <p>Designing unique portfolios and personal branding for professionals and creatives.</p>
-      </div>
-    </div>
-  </section>
+/* SERVICES */
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
 
-  <!-- Contact Section -->
-  <section class="section contact" id="contact">
-    <h2>Contact Me</h2>
-    <p>Let's connect! Reach out via social media or email.</p>
-    <a href="mailto:youremail@example.com">Email Me</a>
-    <a href="https://github.com/yourgithub" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/yourlinkedin" target="_blank">LinkedIn</a>
-  </section>
+.card{
+background:rgba(0,0,0,.6);
+padding:30px;
+border-radius:20px;
+transition:.4s;
+border:1px solid cyan;
+}
 
-  <!-- Map Section -->
-  <section class="section" id="map">
-    <h2 style="text-align:center; margin-bottom:2rem;">My Location</h2>
-    <div class="map-container">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.2667988121693!2d173.01053657526994!3d-1.8749067999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71f5830e6c2d6a07%3A0x83e093d4f2d3a5c9!2sBairiki%2C%20Kiribati!5e0!3m2!1sen!2sus!4v1677000000000!5m2!1sen!2sus"
-        allowfullscreen="" loading="lazy"></iframe>
-    </div>
-  </section>
+.card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 0 25px cyan;
+}
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 KEVIN TAAKE 🇰🇮. All rights reserved.</p>
-  </footer>
+.card h3{
+color:cyan;
+margin-bottom:10px;
+}
 
-  <!-- KEVIN LOGIN ACCESS Script -->
-  <script>
-    const name = "KEVIN TAAKE MATAIO";
-    let i = 0;
-    const speed = 150;
-    const loadingText = document.getElementById("loading-text");
+/* CONTACT */
+.contact{
+text-align:center;
+}
 
-    function typeName() {
-      if (i < name.length) {
-        loadingText.textContent += name.charAt(i);
-        i++;
-        setTimeout(typeName, speed);
-      } else {
-        setInterval(() => {
-          const cursor = document.getElementById("cursor");
-          cursor.style.visibility = (cursor.style.visibility === "visible") ? "hidden" : "visible";
-        }, 500);
-      }
-    }
+.contact a{
+display:inline-block;
+margin:10px;
+padding:12px 25px;
+border-radius:50px;
+border:2px solid cyan;
+color:white;
+text-decoration:none;
+transition:.3s;
+}
 
-    typeName();
-  </script>
+.contact a:hover{
+background:cyan;
+color:black;
+box-shadow:0 0 20px cyan;
+}
 
-</body>
+/* FOOTER */
+footer{
+text-align:center;
+padding:30px;
+color:cyan;
+letter-spacing:2px;
+}
+
+/* TYPING TEXT */
+#typing{
+font-family:monospace;
+font-size:2rem;
+text-align:center;
+color:cyan;
+text-shadow:0 0 15px cyan;
+}
+
+@media(max-width:768px){
+
+nav{
+flex-direction:column;
+gap:10px;
+}
+
+.hero img{
+width:200px;
+height:200px;
+}
+
+.section{
+padding:40px 20px;
+}
+
+}
+
+</style></head><body><nav>
+<h1>KEVIN TAAKE 🇰🇮</h1>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav><section class="hero">
+<img src="kevin-profile.jpg">
+<h2 id="typing"></h2>
+<a href="#contact">Hire Me</a>
+</section><section class="section about" id="about">
+<img src="kevin-profile.jpg">
+<div>
+<h2>About Me</h2>
+<p>I am Kevin Taake Mataio from Tarawa Kiribati 🇰🇮</p>
+<p>Professional Web Developer & Cybersecurity Enthusiast.</p>
+<p>I build modern websites, hacker UI designs and digital branding.</p>
+</div>
+</section><section class="section" id="services">
+<h2 style="text-align:center;margin-bottom:30px;">My Services</h2><div class="cards"><div class="card">
+<h3>Web Development</h3>
+<p>Modern responsive websites and UI designs.</p>
+</div><div class="card">
+<h3>Cybersecurity</h3>
+<p>Ethical hacking and protection solutions.</p>
+</div><div class="card">
+<h3>Portfolio Design</h3>
+<p>Personal branding and creative developer portfolios.</p>
+</div></div>
+</section><section class="section contact" id="contact">
+<h2>Contact Me</h2>
+<a href="#">Email</a>
+<a href="#">GitHub</a>
+<a href="#">LinkedIn</a>
+</section><footer>
+© 2026 KEVIN TAAKE 🇰🇮
+</footer><script>
+
+const text = "ACCESS GRANTED KEVIN";
+let i = 0;
+
+function typing(){
+if(i < text.length){
+document.getElementById("typing").innerHTML += text.charAt(i);
+i++;
+setTimeout(typing,100);
+}
+}
+
+typing();
+
+</script></body>
 </html>
