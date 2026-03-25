@@ -1,0 +1,57 @@
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+font-family:Roboto;
+background:url('https://upload.wikimedia.org/wikipedia/commons/d/d3/Flag_of_Kiribati.svg') no-repeat center fixed;
+background-size:cover;
+font-weight:bold;
+}
+
+nav{
+background:rgba(30,144,255,0.8);
+padding:15px;
+display:flex;
+justify-content:space-between;
+}
+
+.hero{
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.hero img{
+width:250px;
+height:250px;
+border-radius:50%;
+border:4px solid black;
+}
+
+.section{
+background:rgba(255,255,255,0.7);
+padding:40px;
+margin:20px;
+border-radius:15px;
+text-align:center;
+}
+
+.drizzle{
+position:fixed;
+width:100%;
+height:100%;
+background:repeating-linear-gradient(
+to bottom,
+rgba(255,255,255,0.1),
+rgba(255,255,255,0.1) 1px,
+transparent 1px,
+transparent 3px
+);
+animation:drizzle 0.5s linear infinite;
+}
+
+@keyframes drizzle{
+0%{background-position:0 0;}
+100%{background-position:0 100%;}
+}
